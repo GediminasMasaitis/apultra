@@ -120,6 +120,8 @@ typedef struct _apultra_stats {
    int match_divisor;
    int rle1_divisor;
    int rle2_divisor;
+
+   long long total_bits;
 } apultra_stats;
 
 /** Compression context */

@@ -240,6 +240,9 @@ static int do_compress(const char *pszInFilename, const char *pszOutFilename, co
    if (nOptions & OPT_STATS) {
       fprintf(stdout, "Tokens: literals: %d short matches: %d normal matches: %d large matches: %d rep matches: %d EOD: %d\n",
          stats.num_literals, stats.num_4bit_matches, stats.num_7bit_matches, stats.num_variable_matches, stats.num_rep_matches, stats.num_eod);
+      fprintf(stdout, "Compressed bits: %lld last byte: %d bits\n", 
+          stats.total_bits,
+          (int)(stats.total_bits % 8 == 0 ? 8 : stats.total_bits % 8));
       if (stats.match_divisor > 0) {
          fprintf(stdout, "Offsets: min: %d avg: %d max: %d count: %d\n", stats.min_offset, (int)(stats.total_offsets / (long long)stats.match_divisor), stats.max_offset, stats.match_divisor);
          fprintf(stdout, "Match lens: min: %d avg: %d max: %d count: %d\n", stats.min_match_len, stats.total_match_lens / stats.match_divisor, stats.max_match_len, stats.match_divisor);

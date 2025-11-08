@@ -1743,7 +1743,14 @@ size_t apultra_compress(const unsigned char *pInputData, unsigned char *pOutBuff
    }
 
    if (progress)
-      progress(nOriginalSize, nCompressedSize);
+       progress(nOriginalSize, nCompressedSize);
+   if (nCurBitShift != -1) {
+       compressor.stats.total_bits = (long long)(nCompressedSize - 1) * 8LL + (long long)(7 - nCurBitShift);
+   }
+   else {
+       compressor.stats.total_bits = (long long)nCompressedSize * 8LL;
+   }
+
    if (pStats)
       *pStats = compressor.stats;
 
